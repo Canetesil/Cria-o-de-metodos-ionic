@@ -1,0 +1,34 @@
+<ion-header [translucent]="true">
+  <ion-toolbar color="dark">
+    <ion-title>Meu Aplicativo</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="padding">
+
+  <ion-list no-lines>
+    <ion-item *ngIf="tarefas.length <1">
+      <ion-label color="danger">Não há tarefas</ion-label>
+    </ion-item>
+
+    <ion-item-sliding *ngFor="let tarefa of tarefas">
+      <ion-item (click)="abrirAcoes(tarefa)">
+        <ion-label>{{ tarefa.name}}</ion-label>
+        <ion-icon *ngIf="!tarefa.done" slot="start" name="radio-button-off"></ion-icon>
+        <ion-icon *ngIf="tarefa.done" slot="start" name="checkmark-circle-outline" color="success"></ion-icon>
+
+      </ion-item>
+      <ion-item-options side="end">
+        <ion-item-option (click)="delete(tarefa)" color="danger">
+          Excluir
+        </ion-item-option>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button (click)="showAdd()">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+</ion-content>
